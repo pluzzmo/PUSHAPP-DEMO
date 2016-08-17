@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <PushApp/PushApp.h>
+#define kDeviceToken @"deviceToken"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // Push Notifications
+    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
+        // iOS8 Notifications
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [application registerForRemoteNotifications];
+    } else {
+        // <iOS8 Notifications
+        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+    }
+
     return YES;
 }
 
@@ -40,6 +53,31 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Remote Notification
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    NSLog(@"My token is: %@", deviceToken);
+    [[[UIAlertView alloc] initWithTitle:@"Token" message:[NSString stringWithFormat:@"%@", deviceToken] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+    [[NSUserDefaults standardUserDefaults] setObject:deviceToken forKey:kDeviceToken];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    
+    NSLog(@"Failed to get token, error: %@", error);
+    [[[UIAlertView alloc] initWithTitle:@"Info" message:[NSString stringWithFormat:@"%@", error.description] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    [[PushAppCore sharedInstance] notificationReceived:userInfo];
+    NSLog(@"didReceiveRemoteNotification : %@", userInfo);
+    NSString *message = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+    UIAlertView *notificationAlert = [[UIAlertView alloc] initWithTitle:@"Notification Received" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [notificationAlert show];
 }
 
 @end

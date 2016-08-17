@@ -13,6 +13,7 @@
 		184008151D636CF900C8F314 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184008131D636CF900C8F314 /* Main.storyboard */; };
 		184008171D636CF900C8F314 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184008161D636CF900C8F314 /* Assets.xcassets */; };
 		1840081A1D636CF900C8F314 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184008181D636CF900C8F314 /* LaunchScreen.storyboard */; };
+		18CAB86D1D6451DD005E2E2E /* PushApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CAB86C1D6451DD005E2E2E /* PushApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		184008161D636CF900C8F314 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		184008191D636CF900C8F314 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1840081B1D636CF900C8F314 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18CAB86C1D6451DD005E2E2E /* PushApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PushApp.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18CAB86D1D6451DD005E2E2E /* PushApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +61,7 @@
 		184008091D636CF900C8F314 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				18CAB86C1D6451DD005E2E2E /* PushApp.framework */,
 				1840080D1D636CF900C8F314 /* AppDelegate.h */,
 				1840080E1D636CF900C8F314 /* AppDelegate.m */,
 				184008101D636CF900C8F314 /* ViewController.h */,
@@ -110,6 +114,12 @@
 				TargetAttributes = {
 					184008061D636CF900C8F314 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 9CF9728RWT;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -265,11 +275,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: idealump, K.K. (9CF9728RWT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: idealump, K.K. (9CF9728RWT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Demo",
+				);
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.pushapp.Demo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pushapp.locationdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1aa092c0-0e9e-4afa-83f6-ef426835fc57";
 			};
 			name = Debug;
 		};
@@ -277,11 +294,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: idealump, K.K. (9CF9728RWT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: idealump, K.K. (9CF9728RWT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Demo",
+				);
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.pushapp.Demo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pushapp.locationdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1aa092c0-0e9e-4afa-83f6-ef426835fc57";
 			};
 			name = Release;
 		};
@@ -304,6 +328,7 @@
 				184008201D636CF900C8F314 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
